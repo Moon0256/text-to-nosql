@@ -105,41 +105,6 @@
     "flag": false
   },
   {
-    "NLQ": "What is the name of the highest mountain?",
-    "db_id": "climbing",
-    "prediction": "db.mountain.aggregate([{\"$sort\": {\"Height\": -1}}, {\"$limit\": 1}, {\"$project\": {\"Name\": 1, \"_id\": 0}}]);",
-    "target": "db.mountain.aggregate([\n  {\n    $project: {\n      Name: 1,\n      _id: 0\n    }\n  },\n  {\n    $sort: {\n      Height: -1\n    }\n  },\n  {\n    $limit: 1\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "Return the name of the mountain with the greatest height.",
-    "db_id": "climbing",
-    "prediction": "db.mountain.aggregate([{\"$sort\": {\"Height\": -1}}, {\"$limit\": 1}, {\"$project\": {\"Name\": 1, \"_id\": 0}}]);",
-    "target": "db.mountain.aggregate([\n  {\n    $project: {\n      Name: 1,\n      _id: 0\n    }\n  },\n  {\n    $sort: {\n      Height: -1\n    }\n  },\n  {\n    $limit: 1\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "What is the name of the mountain that has the tallest height?",
-    "db_id": "climbing",
-    "prediction": "db.mountain.aggregate([{\"$sort\": {\"Height\": -1}}, {\"$limit\": 1}, {\"$project\": {\"Name\": 1, \"_id\": 0}}]);",
-    "target": "db.mountain.aggregate([\n  {\n    $project: {\n      Name: 1,\n      _id: 0\n    }\n  },\n  {\n    $sort: {\n      Height: -1\n    }\n  },\n  {\n    $limit: 1\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "Please provide the name of the mountain with the highest elevation.",
-    "db_id": "climbing",
-    "prediction": "db.mountain.aggregate([{\"$sort\": {\"Height\": -1}}, {\"$limit\": 1}, {\"$project\": {\"Name\": 1, \"_id\": 0}}]);",
-    "target": "db.mountain.aggregate([\n  {\n    $project: {\n      Name: 1,\n      _id: 0\n    }\n  },\n  {\n    $sort: {\n      Height: -1\n    }\n  },\n  {\n    $limit: 1\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "Identify the mountain known for having the greatest height.",
-    "db_id": "climbing",
-    "prediction": "db.mountain.aggregate([{\"$sort\": {\"Height\": -1}}, {\"$limit\": 1}, {\"$project\": {\"Name\": 1, \"_id\": 0}}]);",
-    "target": "db.mountain.aggregate([\n  {\n    $project: {\n      Name: 1,\n      _id: 0\n    }\n  },\n  {\n    $sort: {\n      Height: -1\n    }\n  },\n  {\n    $limit: 1\n  }\n]);\n",
-    "flag": false
-  },
-  {
     "NLQ": "What is the last name of the staff who has handled the first ever complaint?",
     "db_id": "customer_complaints",
     "prediction": "db.Staff.aggregate([{\"$unwind\": \"$Complaints\"}, {\"$sort\": {\"Complaints.date_complaint_raised\": 1}}, {\"$limit\": 1}, {\"$project\": {\"last_name\": 1, \"_id\": 0}}]);",
@@ -242,41 +207,6 @@
     "db_id": "school_player",
     "prediction": "db.school.aggregate([{\"$unwind\": \"$player\"}, {\"$sort\": {\"player.Age\": -1}}, {\"$limit\": 5}, {\"$project\": {\"Team\": \"$player.Team\", \"_id\": 0}}]);",
     "target": "db.school.aggregate([\n  {\n    $unwind: \"$player\"\n  },\n  {\n    $sort: {\n      \"player.Age\": -1\n    }\n  },\n  {\n    $limit: 5\n  },\n  {\n    $group: {\n      _id: \"$player.Team\"\n    }\n  },\n  {\n    $project: {\n      Team: \"$_id\",\n      _id: 0\n    }\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "What is the last name of the youngest student?",
-    "db_id": "allergy_1",
-    "prediction": "db.Student.aggregate([{\"$lookup\": {\"from\": \"Student\", \"pipeline\": [{\"$group\": {\"_id\": null, \"col1\": {\"$min\": \"$Age\"}}}, {\"$project\": {\"_id\": 0, \"col1\": 1}}, {\"$limit\": 1}], \"as\": \"scalar_subq\"}}, {\"$unwind\": {\"path\": \"$scalar_subq\", \"preserveNullAndEmptyArrays\": false}}, {\"$match\": {\"$expr\": {\"$eq\": [\"$Age\", \"$scalar_subq.col1\"]}}}, {\"$project\": {\"scalar_subq\": 0}}, {\"$project\": {\"LName\": 1, \"_id\": 0}}]);",
-    "target": "db.Student.aggregate([\n  {\n    $sort: { Age: 1 }  \n  },\n  {\n    $limit: 1  \n  },\n  {\n    $project: {\n      _id: 0,  \n      LName: 1  \n    }\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "Provide the last name of the youngest student.",
-    "db_id": "allergy_1",
-    "prediction": "db.Student.aggregate([{\"$lookup\": {\"from\": \"Student\", \"pipeline\": [{\"$group\": {\"_id\": null, \"col1\": {\"$min\": \"$Age\"}}}, {\"$project\": {\"_id\": 0, \"col1\": 1}}, {\"$limit\": 1}], \"as\": \"scalar_subq\"}}, {\"$unwind\": {\"path\": \"$scalar_subq\", \"preserveNullAndEmptyArrays\": false}}, {\"$match\": {\"$expr\": {\"$eq\": [\"$Age\", \"$scalar_subq.col1\"]}}}, {\"$project\": {\"scalar_subq\": 0}}, {\"$project\": {\"LName\": 1, \"_id\": 0}}]);",
-    "target": "db.Student.aggregate([\n  {\n    $sort: { Age: 1 }  \n  },\n  {\n    $limit: 1  \n  },\n  {\n    $project: {\n      _id: 0,  \n      LName: 1  \n    }\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "Could you tell me the last name of the student who is the youngest?",
-    "db_id": "allergy_1",
-    "prediction": "db.Student.aggregate([{\"$lookup\": {\"from\": \"Student\", \"pipeline\": [{\"$group\": {\"_id\": null, \"col1\": {\"$min\": \"$Age\"}}}, {\"$project\": {\"_id\": 0, \"col1\": 1}}, {\"$limit\": 1}], \"as\": \"scalar_subq\"}}, {\"$unwind\": {\"path\": \"$scalar_subq\", \"preserveNullAndEmptyArrays\": false}}, {\"$match\": {\"$expr\": {\"$eq\": [\"$Age\", \"$scalar_subq.col1\"]}}}, {\"$project\": {\"scalar_subq\": 0}}, {\"$project\": {\"LName\": 1, \"_id\": 0}}]);",
-    "target": "db.Student.aggregate([\n  {\n    $sort: { Age: 1 }  \n  },\n  {\n    $limit: 1  \n  },\n  {\n    $project: {\n      _id: 0,  \n      LName: 1  \n    }\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "What is the surname of the youngest student enrolled?",
-    "db_id": "allergy_1",
-    "prediction": "db.Student.aggregate([{\"$lookup\": {\"from\": \"Student\", \"pipeline\": [{\"$group\": {\"_id\": null, \"col1\": {\"$min\": \"$Age\"}}}, {\"$project\": {\"_id\": 0, \"col1\": 1}}, {\"$limit\": 1}], \"as\": \"scalar_subq\"}}, {\"$unwind\": {\"path\": \"$scalar_subq\", \"preserveNullAndEmptyArrays\": false}}, {\"$match\": {\"$expr\": {\"$eq\": [\"$Age\", \"$scalar_subq.col1\"]}}}, {\"$project\": {\"scalar_subq\": 0}}, {\"$project\": {\"LName\": 1, \"_id\": 0}}]);",
-    "target": "db.Student.aggregate([\n  {\n    $sort: { Age: 1 }  \n  },\n  {\n    $limit: 1  \n  },\n  {\n    $project: {\n      _id: 0,  \n      LName: 1  \n    }\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "Can you give me the last name of the student with the lowest age?",
-    "db_id": "allergy_1",
-    "prediction": "db.Student.aggregate([{\"$lookup\": {\"from\": \"Student\", \"pipeline\": [{\"$group\": {\"_id\": null, \"col1\": {\"$min\": \"$Age\"}}}, {\"$project\": {\"_id\": 0, \"col1\": 1}}, {\"$limit\": 1}], \"as\": \"scalar_subq\"}}, {\"$unwind\": {\"path\": \"$scalar_subq\", \"preserveNullAndEmptyArrays\": false}}, {\"$match\": {\"$expr\": {\"$eq\": [\"$Age\", \"$scalar_subq.col1\"]}}}, {\"$project\": {\"scalar_subq\": 0}}, {\"$project\": {\"LName\": 1, \"_id\": 0}}]);",
-    "target": "db.Student.aggregate([\n  {\n    $sort: { Age: 1 }  \n  },\n  {\n    $limit: 1  \n  },\n  {\n    $project: {\n      _id: 0,  \n      LName: 1  \n    }\n  }\n]);\n",
     "flag": false
   },
   {
@@ -420,41 +350,6 @@
     "flag": false
   },
   {
-    "NLQ": "What are the student ids of students who don't have any allergies?",
-    "db_id": "allergy_1",
-    "prediction": "db.Student.aggregate([{\"$project\": {\"StuID\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"StuID\": 1}}, {\"$addFields\": {\"__except_side\": 0}}, {\"$unionWith\": {\"coll\": \"Allergy_Type\", \"pipeline\": [{\"$unwind\": \"$Has_Allergy\"}, {\"$project\": {\"StuID\": \"$Has_Allergy.StuID\", \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"StuID\": 1}}, {\"$addFields\": {\"__except_side\": 1}}]}}, {\"$group\": {\"_id\": {\"StuID\": \"$StuID\"}, \"__except_sides\": {\"$addToSet\": \"$__except_side\"}}}, {\"$match\": {\"__except_sides\": {\"$all\": [0], \"$nin\": [1]}}}, {\"$project\": {\"_id\": 0, \"StuID\": \"$_id.StuID\"}}]);",
-    "target": "db.Student.find({\n  \"Has_Allergy\": []\n}, {\n  \"StuID\": 1,\n  \"_id\": 0\n});\n",
-    "flag": false
-  },
-  {
-    "NLQ": "Which students are unaffected by allergies?",
-    "db_id": "allergy_1",
-    "prediction": "db.Student.aggregate([{\"$project\": {\"StuID\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"StuID\": 1}}, {\"$addFields\": {\"__except_side\": 0}}, {\"$unionWith\": {\"coll\": \"Allergy_Type\", \"pipeline\": [{\"$unwind\": \"$Has_Allergy\"}, {\"$project\": {\"StuID\": \"$Has_Allergy.StuID\", \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"StuID\": 1}}, {\"$addFields\": {\"__except_side\": 1}}]}}, {\"$group\": {\"_id\": {\"StuID\": \"$StuID\"}, \"__except_sides\": {\"$addToSet\": \"$__except_side\"}}}, {\"$match\": {\"__except_sides\": {\"$all\": [0], \"$nin\": [1]}}}, {\"$project\": {\"_id\": 0, \"StuID\": \"$_id.StuID\"}}]);",
-    "target": "db.Student.find({\n  \"Has_Allergy\": []\n}, {\n  \"StuID\": 1,\n  \"_id\": 0\n});\n",
-    "flag": false
-  },
-  {
-    "NLQ": "List the student IDs of individuals with no allergies recorded.",
-    "db_id": "allergy_1",
-    "prediction": "db.Student.aggregate([{\"$project\": {\"StuID\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"StuID\": 1}}, {\"$addFields\": {\"__except_side\": 0}}, {\"$unionWith\": {\"coll\": \"Allergy_Type\", \"pipeline\": [{\"$unwind\": \"$Has_Allergy\"}, {\"$project\": {\"StuID\": \"$Has_Allergy.StuID\", \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"StuID\": 1}}, {\"$addFields\": {\"__except_side\": 1}}]}}, {\"$group\": {\"_id\": {\"StuID\": \"$StuID\"}, \"__except_sides\": {\"$addToSet\": \"$__except_side\"}}}, {\"$match\": {\"__except_sides\": {\"$all\": [0], \"$nin\": [1]}}}, {\"$project\": {\"_id\": 0, \"StuID\": \"$_id.StuID\"}}]);",
-    "target": "db.Student.find({\n  \"Has_Allergy\": []\n}, {\n  \"StuID\": 1,\n  \"_id\": 0\n});\n",
-    "flag": false
-  },
-  {
-    "NLQ": "Provide the names of students who do not have any allergies.",
-    "db_id": "allergy_1",
-    "prediction": "db.Student.aggregate([{\"$project\": {\"StuID\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"StuID\": 1}}, {\"$addFields\": {\"__except_side\": 0}}, {\"$unionWith\": {\"coll\": \"Allergy_Type\", \"pipeline\": [{\"$unwind\": \"$Has_Allergy\"}, {\"$project\": {\"StuID\": \"$Has_Allergy.StuID\", \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"StuID\": 1}}, {\"$addFields\": {\"__except_side\": 1}}]}}, {\"$group\": {\"_id\": {\"StuID\": \"$StuID\"}, \"__except_sides\": {\"$addToSet\": \"$__except_side\"}}}, {\"$match\": {\"__except_sides\": {\"$all\": [0], \"$nin\": [1]}}}, {\"$project\": {\"_id\": 0, \"StuID\": \"$_id.StuID\"}}]);",
-    "target": "db.Student.find({\n  \"Has_Allergy\": []\n}, {\n  \"StuID\": 1,\n  \"_id\": 0\n});\n",
-    "flag": false
-  },
-  {
-    "NLQ": "Identify students who are free from any allergic conditions.",
-    "db_id": "allergy_1",
-    "prediction": "db.Student.aggregate([{\"$project\": {\"StuID\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"StuID\": 1}}, {\"$addFields\": {\"__except_side\": 0}}, {\"$unionWith\": {\"coll\": \"Allergy_Type\", \"pipeline\": [{\"$unwind\": \"$Has_Allergy\"}, {\"$project\": {\"StuID\": \"$Has_Allergy.StuID\", \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"StuID\": 1}}, {\"$addFields\": {\"__except_side\": 1}}]}}, {\"$group\": {\"_id\": {\"StuID\": \"$StuID\"}, \"__except_sides\": {\"$addToSet\": \"$__except_side\"}}}, {\"$match\": {\"__except_sides\": {\"$all\": [0], \"$nin\": [1]}}}, {\"$project\": {\"_id\": 0, \"StuID\": \"$_id.StuID\"}}]);",
-    "target": "db.Student.find({\n  \"Has_Allergy\": []\n}, {\n  \"StuID\": 1,\n  \"_id\": 0\n});\n",
-    "flag": false
-  },
-  {
     "NLQ": "Show names of technicians in ascending order of quality rank of the machine they are assigned.",
     "db_id": "machine_repair",
     "prediction": "db.repair.aggregate([{\"$unwind\": \"$repair_assignment\"}, {\"$lookup\": {\"from\": \"machine\", \"localField\": \"repair_assignment.Machine_ID\", \"foreignField\": \"Machine_ID\", \"as\": \"Docs1\"}}, {\"$unwind\": \"$Docs1\"}, {\"$lookup\": {\"from\": \"technician\", \"localField\": \"repair_assignment.technician_id\", \"foreignField\": \"technician_id\", \"as\": \"Docs2\"}}, {\"$unwind\": \"$Docs2\"}, {\"$sort\": {\"Docs1.quality_rank\": 1}}, {\"$project\": {\"Name\": \"$Docs2.Name\", \"_id\": 0}}]);",
@@ -527,35 +422,35 @@
   {
     "NLQ": "Show names for all employees who do not have certificate of Boeing 737-800.",
     "db_id": "flight_1",
-    "prediction": "db.employee.aggregate([{\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 0}}, {\"$unionWith\": {\"coll\": \"employee\", \"pipeline\": [{\"$lookup\": {\"from\": \"aircraft\", \"let\": {\"local_field\": \"$eid\"}, \"pipeline\": [{\"$unwind\": \"$certificate\"}, {\"$match\": {\"$expr\": {\"$eq\": [\"$certificate.eid\", \"$$local_field\"]}}}, {\"$project\": {\"name\": \"$name\", \"distance\": \"$distance\", \"eid\": \"$certificate.eid\", \"aid\": \"$certificate.aid\", \"_id\": 0}}], \"as\": \"Docs1\"}}, {\"$unwind\": \"$Docs1\"}, {\"$lookup\": {\"from\": \"aircraft\", \"localField\": \"Docs1.aid\", \"foreignField\": \"aid\", \"as\": \"Docs2\"}}, {\"$unwind\": \"$Docs2\"}, {\"$match\": {\"Docs2.name\": \"Boeing 737-800\"}}, {\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 1}}]}}, {\"$group\": {\"_id\": {\"name\": \"$name\"}, \"__except_sides\": {\"$addToSet\": \"$__except_side\"}}}, {\"$match\": {\"__except_sides\": {\"$all\": [0], \"$nin\": [1]}}}, {\"$project\": {\"_id\": 0, \"name\": \"$_id.name\"}}]);",
+    "prediction": "db.employee.aggregate([{\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 0}}, {\"$unionWith\": {\"coll\": \"employee\", \"pipeline\": [{\"$unwind\": \"$certificate\"}, {\"$lookup\": {\"from\": \"aircraft\", \"localField\": \"certificate.aid\", \"foreignField\": \"aid\", \"as\": \"Docs1\"}}, {\"$unwind\": \"$Docs1\"}, {\"$match\": {\"Docs1.name\": \"Boeing 737-800\"}}, {\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 1}}]}}, {\"$group\": {\"_id\": {\"name\": \"$name\"}, \"__except_sides\": {\"$addToSet\": \"$__except_side\"}}}, {\"$match\": {\"__except_sides\": {\"$all\": [0], \"$nin\": [1]}}}, {\"$project\": {\"_id\": 0, \"name\": \"$_id.name\"}}]);",
     "target": "db.employee.aggregate([\n  {\n    $lookup: {\n      from: \"aircraft\",\n      localField: \"certificate.aid\",\n      foreignField: \"aid\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $match: {\n      \"Docs1.name\": { $ne: \"Boeing 737-800\" }\n    }\n  },\n  {\n    $project: {\n      name: 1,\n      _id: 0\n    }\n  }\n]);\n",
     "flag": false
   },
   {
     "NLQ": "What are the names of all employees who are not certified to fly Boeing 737-800s?",
     "db_id": "flight_1",
-    "prediction": "db.employee.aggregate([{\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 0}}, {\"$unionWith\": {\"coll\": \"employee\", \"pipeline\": [{\"$lookup\": {\"from\": \"aircraft\", \"let\": {\"local_field\": \"$eid\"}, \"pipeline\": [{\"$unwind\": \"$certificate\"}, {\"$match\": {\"$expr\": {\"$eq\": [\"$certificate.eid\", \"$$local_field\"]}}}, {\"$project\": {\"name\": \"$name\", \"distance\": \"$distance\", \"eid\": \"$certificate.eid\", \"aid\": \"$certificate.aid\", \"_id\": 0}}], \"as\": \"Docs1\"}}, {\"$unwind\": \"$Docs1\"}, {\"$lookup\": {\"from\": \"aircraft\", \"localField\": \"Docs1.aid\", \"foreignField\": \"aid\", \"as\": \"Docs2\"}}, {\"$unwind\": \"$Docs2\"}, {\"$match\": {\"Docs2.name\": \"Boeing 737-800\"}}, {\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 1}}]}}, {\"$group\": {\"_id\": {\"name\": \"$name\"}, \"__except_sides\": {\"$addToSet\": \"$__except_side\"}}}, {\"$match\": {\"__except_sides\": {\"$all\": [0], \"$nin\": [1]}}}, {\"$project\": {\"_id\": 0, \"name\": \"$_id.name\"}}]);",
+    "prediction": "db.employee.aggregate([{\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 0}}, {\"$unionWith\": {\"coll\": \"employee\", \"pipeline\": [{\"$unwind\": \"$certificate\"}, {\"$lookup\": {\"from\": \"aircraft\", \"localField\": \"certificate.aid\", \"foreignField\": \"aid\", \"as\": \"Docs1\"}}, {\"$unwind\": \"$Docs1\"}, {\"$match\": {\"Docs1.name\": \"Boeing 737-800\"}}, {\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 1}}]}}, {\"$group\": {\"_id\": {\"name\": \"$name\"}, \"__except_sides\": {\"$addToSet\": \"$__except_side\"}}}, {\"$match\": {\"__except_sides\": {\"$all\": [0], \"$nin\": [1]}}}, {\"$project\": {\"_id\": 0, \"name\": \"$_id.name\"}}]);",
     "target": "db.employee.aggregate([\n  {\n    $lookup: {\n      from: \"aircraft\",\n      localField: \"certificate.aid\",\n      foreignField: \"aid\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $match: {\n      \"Docs1.name\": { $ne: \"Boeing 737-800\" }\n    }\n  },\n  {\n    $project: {\n      name: 1,\n      _id: 0\n    }\n  }\n]);\n",
     "flag": false
   },
   {
     "NLQ": "List the names of employees lacking certification for the Boeing 737-800.",
     "db_id": "flight_1",
-    "prediction": "db.employee.aggregate([{\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 0}}, {\"$unionWith\": {\"coll\": \"employee\", \"pipeline\": [{\"$lookup\": {\"from\": \"aircraft\", \"let\": {\"local_field\": \"$eid\"}, \"pipeline\": [{\"$unwind\": \"$certificate\"}, {\"$match\": {\"$expr\": {\"$eq\": [\"$certificate.eid\", \"$$local_field\"]}}}, {\"$project\": {\"name\": \"$name\", \"distance\": \"$distance\", \"eid\": \"$certificate.eid\", \"aid\": \"$certificate.aid\", \"_id\": 0}}], \"as\": \"Docs1\"}}, {\"$unwind\": \"$Docs1\"}, {\"$lookup\": {\"from\": \"aircraft\", \"localField\": \"Docs1.aid\", \"foreignField\": \"aid\", \"as\": \"Docs2\"}}, {\"$unwind\": \"$Docs2\"}, {\"$match\": {\"Docs2.name\": \"Boeing 737-800\"}}, {\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 1}}]}}, {\"$group\": {\"_id\": {\"name\": \"$name\"}, \"__except_sides\": {\"$addToSet\": \"$__except_side\"}}}, {\"$match\": {\"__except_sides\": {\"$all\": [0], \"$nin\": [1]}}}, {\"$project\": {\"_id\": 0, \"name\": \"$_id.name\"}}]);",
+    "prediction": "db.employee.aggregate([{\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 0}}, {\"$unionWith\": {\"coll\": \"employee\", \"pipeline\": [{\"$unwind\": \"$certificate\"}, {\"$lookup\": {\"from\": \"aircraft\", \"localField\": \"certificate.aid\", \"foreignField\": \"aid\", \"as\": \"Docs1\"}}, {\"$unwind\": \"$Docs1\"}, {\"$match\": {\"Docs1.name\": \"Boeing 737-800\"}}, {\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 1}}]}}, {\"$group\": {\"_id\": {\"name\": \"$name\"}, \"__except_sides\": {\"$addToSet\": \"$__except_side\"}}}, {\"$match\": {\"__except_sides\": {\"$all\": [0], \"$nin\": [1]}}}, {\"$project\": {\"_id\": 0, \"name\": \"$_id.name\"}}]);",
     "target": "db.employee.aggregate([\n  {\n    $lookup: {\n      from: \"aircraft\",\n      localField: \"certificate.aid\",\n      foreignField: \"aid\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $match: {\n      \"Docs1.name\": { $ne: \"Boeing 737-800\" }\n    }\n  },\n  {\n    $project: {\n      name: 1,\n      _id: 0\n    }\n  }\n]);\n",
     "flag": false
   },
   {
     "NLQ": "Provide the names of all staff who do not hold a certificate for Boeing 737-800 aircraft.",
     "db_id": "flight_1",
-    "prediction": "db.employee.aggregate([{\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 0}}, {\"$unionWith\": {\"coll\": \"employee\", \"pipeline\": [{\"$lookup\": {\"from\": \"aircraft\", \"let\": {\"local_field\": \"$eid\"}, \"pipeline\": [{\"$unwind\": \"$certificate\"}, {\"$match\": {\"$expr\": {\"$eq\": [\"$certificate.eid\", \"$$local_field\"]}}}, {\"$project\": {\"name\": \"$name\", \"distance\": \"$distance\", \"eid\": \"$certificate.eid\", \"aid\": \"$certificate.aid\", \"_id\": 0}}], \"as\": \"Docs1\"}}, {\"$unwind\": \"$Docs1\"}, {\"$lookup\": {\"from\": \"aircraft\", \"localField\": \"Docs1.aid\", \"foreignField\": \"aid\", \"as\": \"Docs2\"}}, {\"$unwind\": \"$Docs2\"}, {\"$match\": {\"Docs2.name\": \"Boeing 737-800\"}}, {\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 1}}]}}, {\"$group\": {\"_id\": {\"name\": \"$name\"}, \"__except_sides\": {\"$addToSet\": \"$__except_side\"}}}, {\"$match\": {\"__except_sides\": {\"$all\": [0], \"$nin\": [1]}}}, {\"$project\": {\"_id\": 0, \"name\": \"$_id.name\"}}]);",
+    "prediction": "db.employee.aggregate([{\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 0}}, {\"$unionWith\": {\"coll\": \"employee\", \"pipeline\": [{\"$unwind\": \"$certificate\"}, {\"$lookup\": {\"from\": \"aircraft\", \"localField\": \"certificate.aid\", \"foreignField\": \"aid\", \"as\": \"Docs1\"}}, {\"$unwind\": \"$Docs1\"}, {\"$match\": {\"Docs1.name\": \"Boeing 737-800\"}}, {\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 1}}]}}, {\"$group\": {\"_id\": {\"name\": \"$name\"}, \"__except_sides\": {\"$addToSet\": \"$__except_side\"}}}, {\"$match\": {\"__except_sides\": {\"$all\": [0], \"$nin\": [1]}}}, {\"$project\": {\"_id\": 0, \"name\": \"$_id.name\"}}]);",
     "target": "db.employee.aggregate([\n  {\n    $lookup: {\n      from: \"aircraft\",\n      localField: \"certificate.aid\",\n      foreignField: \"aid\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $match: {\n      \"Docs1.name\": { $ne: \"Boeing 737-800\" }\n    }\n  },\n  {\n    $project: {\n      name: 1,\n      _id: 0\n    }\n  }\n]);\n",
     "flag": false
   },
   {
     "NLQ": "Identify the names of employees who are not qualified to operate Boeing 737-800s.",
     "db_id": "flight_1",
-    "prediction": "db.employee.aggregate([{\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 0}}, {\"$unionWith\": {\"coll\": \"employee\", \"pipeline\": [{\"$lookup\": {\"from\": \"aircraft\", \"let\": {\"local_field\": \"$eid\"}, \"pipeline\": [{\"$unwind\": \"$certificate\"}, {\"$match\": {\"$expr\": {\"$eq\": [\"$certificate.eid\", \"$$local_field\"]}}}, {\"$project\": {\"name\": \"$name\", \"distance\": \"$distance\", \"eid\": \"$certificate.eid\", \"aid\": \"$certificate.aid\", \"_id\": 0}}], \"as\": \"Docs1\"}}, {\"$unwind\": \"$Docs1\"}, {\"$lookup\": {\"from\": \"aircraft\", \"localField\": \"Docs1.aid\", \"foreignField\": \"aid\", \"as\": \"Docs2\"}}, {\"$unwind\": \"$Docs2\"}, {\"$match\": {\"Docs2.name\": \"Boeing 737-800\"}}, {\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 1}}]}}, {\"$group\": {\"_id\": {\"name\": \"$name\"}, \"__except_sides\": {\"$addToSet\": \"$__except_side\"}}}, {\"$match\": {\"__except_sides\": {\"$all\": [0], \"$nin\": [1]}}}, {\"$project\": {\"_id\": 0, \"name\": \"$_id.name\"}}]);",
+    "prediction": "db.employee.aggregate([{\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 0}}, {\"$unionWith\": {\"coll\": \"employee\", \"pipeline\": [{\"$unwind\": \"$certificate\"}, {\"$lookup\": {\"from\": \"aircraft\", \"localField\": \"certificate.aid\", \"foreignField\": \"aid\", \"as\": \"Docs1\"}}, {\"$unwind\": \"$Docs1\"}, {\"$match\": {\"Docs1.name\": \"Boeing 737-800\"}}, {\"$project\": {\"name\": 1, \"_id\": 0}}, {\"$project\": {\"_id\": 0, \"name\": 1}}, {\"$addFields\": {\"__except_side\": 1}}]}}, {\"$group\": {\"_id\": {\"name\": \"$name\"}, \"__except_sides\": {\"$addToSet\": \"$__except_side\"}}}, {\"$match\": {\"__except_sides\": {\"$all\": [0], \"$nin\": [1]}}}, {\"$project\": {\"_id\": 0, \"name\": \"$_id.name\"}}]);",
     "target": "db.employee.aggregate([\n  {\n    $lookup: {\n      from: \"aircraft\",\n      localField: \"certificate.aid\",\n      foreignField: \"aid\",\n      as: \"Docs1\"\n    }\n  },\n  {\n    $match: {\n      \"Docs1.name\": { $ne: \"Boeing 737-800\" }\n    }\n  },\n  {\n    $project: {\n      name: 1,\n      _id: 0\n    }\n  }\n]);\n",
     "flag": false
   },
@@ -627,76 +522,6 @@
     "db_id": "wine_1",
     "prediction": "db.appellations.aggregate([{\"$unwind\": \"$wine\"}, {\"$match\": {\"wine.Score\": {\"$gt\": 90}}}, {\"$project\": {\"Name\": \"$wine.Name\", \"_id\": 0}}]);",
     "target": "db.grapes.aggregate([\n  {\n    $unwind: \"$wine\"\n  },\n  {\n    $match: {\n      \"wine.Score\": {\n        $gt: 90\n      }\n    }\n  },\n  {\n    $group: {\n      _id: \"$wine.Name\"\n    }\n  },\n  {\n    $project: {\n      Name: \"$_id\",\n      _id: 0\n    }\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "Show the student id of the oldest student.",
-    "db_id": "allergy_1",
-    "prediction": "db.Student.aggregate([{\"$lookup\": {\"from\": \"Student\", \"pipeline\": [{\"$group\": {\"_id\": null, \"col1\": {\"$max\": \"$Age\"}}}, {\"$project\": {\"_id\": 0, \"col1\": 1}}, {\"$limit\": 1}], \"as\": \"scalar_subq\"}}, {\"$unwind\": {\"path\": \"$scalar_subq\", \"preserveNullAndEmptyArrays\": false}}, {\"$match\": {\"$expr\": {\"$eq\": [\"$Age\", \"$scalar_subq.col1\"]}}}, {\"$project\": {\"scalar_subq\": 0}}, {\"$project\": {\"StuID\": 1, \"_id\": 0}}]);",
-    "target": "db.Student.aggregate([\n  {\n    $sort: { Age: -1 }  \n  },\n  {\n    $limit: 1  \n  },\n  {\n    $project: {\n      StuID: 1,  \n      _id: 0  \n    }\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "What student id corresponds to the oldest student?",
-    "db_id": "allergy_1",
-    "prediction": "db.Student.aggregate([{\"$lookup\": {\"from\": \"Student\", \"pipeline\": [{\"$group\": {\"_id\": null, \"col1\": {\"$max\": \"$Age\"}}}, {\"$project\": {\"_id\": 0, \"col1\": 1}}, {\"$limit\": 1}], \"as\": \"scalar_subq\"}}, {\"$unwind\": {\"path\": \"$scalar_subq\", \"preserveNullAndEmptyArrays\": false}}, {\"$match\": {\"$expr\": {\"$eq\": [\"$Age\", \"$scalar_subq.col1\"]}}}, {\"$project\": {\"scalar_subq\": 0}}, {\"$project\": {\"StuID\": 1, \"_id\": 0}}]);",
-    "target": "db.Student.aggregate([\n  {\n    $sort: { Age: -1 }  \n  },\n  {\n    $limit: 1  \n  },\n  {\n    $project: {\n      StuID: 1,  \n      _id: 0  \n    }\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "What is the student ID of the student who is the oldest?",
-    "db_id": "allergy_1",
-    "prediction": "db.Student.aggregate([{\"$lookup\": {\"from\": \"Student\", \"pipeline\": [{\"$group\": {\"_id\": null, \"col1\": {\"$max\": \"$Age\"}}}, {\"$project\": {\"_id\": 0, \"col1\": 1}}, {\"$limit\": 1}], \"as\": \"scalar_subq\"}}, {\"$unwind\": {\"path\": \"$scalar_subq\", \"preserveNullAndEmptyArrays\": false}}, {\"$match\": {\"$expr\": {\"$eq\": [\"$Age\", \"$scalar_subq.col1\"]}}}, {\"$project\": {\"scalar_subq\": 0}}, {\"$project\": {\"StuID\": 1, \"_id\": 0}}]);",
-    "target": "db.Student.aggregate([\n  {\n    $sort: { Age: -1 }  \n  },\n  {\n    $limit: 1  \n  },\n  {\n    $project: {\n      StuID: 1,  \n      _id: 0  \n    }\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "Can you provide the student ID for the oldest student?",
-    "db_id": "allergy_1",
-    "prediction": "db.Student.aggregate([{\"$lookup\": {\"from\": \"Student\", \"pipeline\": [{\"$group\": {\"_id\": null, \"col1\": {\"$max\": \"$Age\"}}}, {\"$project\": {\"_id\": 0, \"col1\": 1}}, {\"$limit\": 1}], \"as\": \"scalar_subq\"}}, {\"$unwind\": {\"path\": \"$scalar_subq\", \"preserveNullAndEmptyArrays\": false}}, {\"$match\": {\"$expr\": {\"$eq\": [\"$Age\", \"$scalar_subq.col1\"]}}}, {\"$project\": {\"scalar_subq\": 0}}, {\"$project\": {\"StuID\": 1, \"_id\": 0}}]);",
-    "target": "db.Student.aggregate([\n  {\n    $sort: { Age: -1 }  \n  },\n  {\n    $limit: 1  \n  },\n  {\n    $project: {\n      StuID: 1,  \n      _id: 0  \n    }\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "Identify the student ID associated with the oldest student.",
-    "db_id": "allergy_1",
-    "prediction": "db.Student.aggregate([{\"$lookup\": {\"from\": \"Student\", \"pipeline\": [{\"$group\": {\"_id\": null, \"col1\": {\"$max\": \"$Age\"}}}, {\"$project\": {\"_id\": 0, \"col1\": 1}}, {\"$limit\": 1}], \"as\": \"scalar_subq\"}}, {\"$unwind\": {\"path\": \"$scalar_subq\", \"preserveNullAndEmptyArrays\": false}}, {\"$match\": {\"$expr\": {\"$eq\": [\"$Age\", \"$scalar_subq.col1\"]}}}, {\"$project\": {\"scalar_subq\": 0}}, {\"$project\": {\"StuID\": 1, \"_id\": 0}}]);",
-    "target": "db.Student.aggregate([\n  {\n    $sort: { Age: -1 }  \n  },\n  {\n    $limit: 1  \n  },\n  {\n    $project: {\n      StuID: 1,  \n      _id: 0  \n    }\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "Show all allergies with type food.",
-    "db_id": "allergy_1",
-    "prediction": "db.Allergy_Type.distinct(\"Allergy\", {\"AllergyType\": \"food\"});",
-    "target": "db.Allergy_Type.aggregate([\n  {\n    $match: {\n      AllergyType: \"food\"\n    }\n  },\n  {\n    $project: {\n      Allergy: 1,\n      _id: 0\n    }\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "What are all the different food allergies?",
-    "db_id": "allergy_1",
-    "prediction": "db.Allergy_Type.distinct(\"Allergy\", {\"AllergyType\": \"food\"});",
-    "target": "db.Allergy_Type.aggregate([\n  {\n    $match: {\n      AllergyType: \"food\"\n    }\n  },\n  {\n    $project: {\n      Allergy: 1,\n      _id: 0\n    }\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "List all types of allergies related to food.",
-    "db_id": "allergy_1",
-    "prediction": "db.Allergy_Type.distinct(\"Allergy\", {\"AllergyType\": \"food\"});",
-    "target": "db.Allergy_Type.aggregate([\n  {\n    $match: {\n      AllergyType: \"food\"\n    }\n  },\n  {\n    $project: {\n      Allergy: 1,\n      _id: 0\n    }\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "What food allergies are there?",
-    "db_id": "allergy_1",
-    "prediction": "db.Allergy_Type.distinct(\"Allergy\", {\"AllergyType\": \"food\"});",
-    "target": "db.Allergy_Type.aggregate([\n  {\n    $match: {\n      AllergyType: \"food\"\n    }\n  },\n  {\n    $project: {\n      Allergy: 1,\n      _id: 0\n    }\n  }\n]);\n",
-    "flag": false
-  },
-  {
-    "NLQ": "Provide a list of all allergies categorized as food.",
-    "db_id": "allergy_1",
-    "prediction": "db.Allergy_Type.distinct(\"Allergy\", {\"AllergyType\": \"food\"});",
-    "target": "db.Allergy_Type.aggregate([\n  {\n    $match: {\n      AllergyType: \"food\"\n    }\n  },\n  {\n    $project: {\n      Allergy: 1,\n      _id: 0\n    }\n  }\n]);\n",
     "flag": false
   },
   {
